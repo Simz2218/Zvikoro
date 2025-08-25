@@ -1,0 +1,23 @@
+.position-fixed {
+  transition: transform 0.3s ease-in-out;
+}
+
+.position-fixed.open {
+  transform: translateX(0);
+}
+
+.position-fixed:not(.open) {
+  transform: translateX(-100%);
+}
+
+.navbar {
+  margin-bottom: 0;
+}
+
+.nav-link {
+  transition: background-color 0.2s ease-in-out;
+}
+
+.nav-link:hover {
+  background-color: #f0f0f0;
+}

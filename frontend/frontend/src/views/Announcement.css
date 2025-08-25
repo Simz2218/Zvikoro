@@ -1,0 +1,81 @@
+.announcements-container {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  font-family: "Segoe UI", sans-serif;
+
+  /* ✅ Public folder path */
+ 
+}
+
+/* Page title */
+.page-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #fff;
+}
+
+/* No messages text */
+.no-messages {
+  text-align: center;
+  color: #ddd;
+  font-style: italic;
+}
+
+/* Announcement card */
+.announcement-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 0 auto 1.5rem auto;
+  max-width: 700px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+
+.announcement-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Header with profile */
+.announcement-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.profile-pic {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #3498db;
+}
+
+.user-info {
+  flex: 1;
+  text-align: center; /* ✅ centers username & department */
+}
+
+.username {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.department {
+  display: block;
+  font-size: 0.95rem;
+  color: #7f8c8d;
+}
+
+.announcement-body p {
+  margin: 0;
+  font-size: 1rem;
+  color: #2c3e50;
+  line-height: 1.5;
+}
