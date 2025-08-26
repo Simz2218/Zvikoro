@@ -1,0 +1,7 @@
+services:
+  - type: web
+    name: Zvikoro
+    env: python
+    buildCommand: pip install --no-build-isolation -r requirements.txt
+    startCommand: gunicorn better_schools.wsgi
+    pythonVersion: 3.11
