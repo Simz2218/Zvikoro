@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import AuthContext, { URLS } from "../context/AuthContext";
 import Swal from "sweetalert2";
+import bluesky from "../views/pictures/bluesky.png";
 
 const Profilepage = () => {
   const {

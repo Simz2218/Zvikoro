@@ -7,7 +7,7 @@ import React, {
 } from "react";
 import AuthContext from "../context/AuthContext";
 import Swal from "sweetalert2";
-
+import bluesky from "../views/pictures/bluesky.png";
 const HRpage = () => {
   const { authFetch, authTokens, URLS } = useContext(AuthContext);
 

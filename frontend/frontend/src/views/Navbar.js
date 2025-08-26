@@ -30,7 +30,7 @@ const Navbar = ({ districtName = "ZAKA DISTRICT" }) => {
   const canSeeEmployees = isAdmin;
 
   return (
-    <div className="d-flex flex-column min-vh-100">
+    <div className="d-flex flex-column min-vh-10">
       {/* Top Navbar */}
       <nav
         className="navbar navbar-dark bg-primary px-4 py-3 d-flex justify-content-between align-items-center shadow"

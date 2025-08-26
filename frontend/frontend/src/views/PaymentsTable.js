@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useAxios from "../utils/useAxios";
 import backgroundImage from "./pictures/great_zimbabwe.jpg";
+import bluesky from "../views/pictures/bluesky.png";
 
 function PaymentsTable() {
   const { axiosInstance } = useAxios();

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import Swal from "sweetalert2";
 import AuthContext from "../context/AuthContext";
+import bluesky from "../views/pictures/bluesky.png";
 
 function RegisterPage() {
   const { registerUser } = useContext(AuthContext);

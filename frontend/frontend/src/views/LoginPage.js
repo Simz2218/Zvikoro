@@ -4,6 +4,7 @@ import AuthContext from "../context/AuthContext";
 import backgroundImage from "./pictures/Lover of the World.jpg";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Swal from "sweetalert2";
+import bluesky from "../views/pictures/bluesky.png";
 
 function LoginPage() {
   const { loginUser } = useContext(AuthContext);

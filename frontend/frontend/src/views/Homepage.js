@@ -1,113 +1,181 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import bluesky from "../views/pictures/bluesky.png";
 
 function Homepage() {
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
+
+  const profiles = [
+    {
+      name: "Samson Chidzurira",
+      title: "District Schools Inspector (DSI)",
+      bio: "Oversees all schools in the district, monitors teaching staff, and serves as the Accounting Officer.",
+      duties: [
+        "Coordinates recruitment, transfers, promotions, and placements",
+        "Maintains updated establishment strength",
+        "Declares vacancies and endorses interviews"
+      ]
+    },
+    {
+      name: "Inspectorate Team",
+      title: "Schools Inspectors",
+      bio: "Team of four inspectors responsible for school inspections and curriculum implementation.",
+      members: ["Mr Bangamuseve J", "Mr Fusirai T", "Mr Chivingira C", "Mr Mucheki V"],
+      duties: [
+        "Inspect primary and secondary schools",
+        "Organize PLAP and ERI workshops",
+        "Supervise curriculum rollout and teacher training"
+      ]
+    },
+    {
+      name: "Ms Simbo N & Mr Manyuni N",
+      title: "Human Resources Department",
+      bio: "Manage staffing, grievances, disciplinary cases, allowances, and teacher records.",
+      duties: [
+        "Process appointments, leave, and terminations",
+        "Handle salary queries and misconduct tracking",
+        "Maintain teacher data and training records"
+      ]
+    },
+    {
+      name: "Mr Manyeruke D & Mrs Chikasha P",
+      title: "Accounts Department",
+      bio: "Oversee financial records, budgeting, payments, and compliance across district schools.",
+      duties: [
+        "Produce financial reports and statutory returns",
+        "Advise schools on finance policies",
+        "Manage SIG and GPE funds"
+      ]
+    },
+    {
+      name: "Ms Chidzurira G",
+      title: "Administration Department",
+      bio: "Handles procurement, transport, maintenance, secretarial services, asset tracking, and office accommodation.",
+      duties: [
+        "Manage requisitions, stores, and monthly reports",
+        "Supervise transport and emergency repairs",
+        "Maintain asset and housing records"
+      ]
+    },
+    {
+      name: "Mrs Muyambo R",
+      title: "Adult Literacy Department",
+      bio: "Promotes Non-Formal Education and supervises adult literacy centres and facilitators.",
+      duties: [
+        "Conduct workshops and collect NFE statistics",
+        "Coordinate registration and policy rollout",
+        "Support community engagement and reporting"
+      ]
+    },
+    {
+      name: "Mr Chitingwiza P",
+      title: "Special Needs Education Department",
+      bio: "Supports remedial teams, organizes screening, and monitors special needs programmes.",
+      duties: [
+        "Coordinate early identification and remediation",
+        "Liaise with psychologists and trained teachers",
+        "Ensure inclusive education practices"
+      ]
+    }
+  ];
+
   return (
     <div
       style={{
-        backgroundImage: 'url("https://upload.wikimedia.org/wikipedia/commons/6/6a/Flag_of_Zimbabwe.svg")',
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${bluesky})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         minHeight: '100vh',
         padding: '2rem',
-        color: '#fff', // white text for contrast
-        textShadow: '1px 1px 4px rgba(0,0,0,0.8)', // makes text readable
+        color: '#fff',
+        textShadow: '1px 1px 4px rgba(0,0,0,0.8)',
       }}
     >
-      {/* Big Header */}
-      <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>
+      <h1 style={{ fontSize: '2.5rem', textAlign: 'center' }}>
         Better Schools Program Of Zimbabwe
       </h1>
-
-      {/* Smaller Header */}
-      <h2 style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>
+      <h2 style={{ fontSize: '1.5rem', textAlign: 'center', marginBottom: '2rem' }}>
         Zaka District, Masvingo Province
       </h2>
 
-      {/* Paragraph */}
-      <p style={{ lineHeight: '1.6', fontSize: '1rem', maxWidth: '900px' }}>
-        Masvingo District Better Schools Programme Zimbabwe Centre (BSPZ) in Mucheke,
-        which houses the district’s education offices, has been described as the best
-        in terms of architectural design. Speaking at the official opening of the centre
-        on June 14, 2024, Ministry of Primary and Secondary Education Permanent Secretary
-        Moses Mhike said the centre was beautiful and others should have copied from it.
-        <br /><br />
-        “We were in Zaka on Tuesday and Chivi on Thursday before we came here and we have
-        witnessed excellent work in the two districts but Masvingo District has proven to
-        be exceptional, we are very proud,” said Mhike.
-        <br /><br />
-        Mhike said the BSPZ complex was a cornerstone of the National Development Strategy
-        1 and 2 and is poised to redefine the education landscape. “BSPZ centres represent
-        a strategic investment in human capital development which is a cornerstone of
-        National Development Strategy 1 and 2. As a ministry, we envision this space to be
-        a hub of creativity, with its state-of-the-art structure, the designed BSPZ centre
-        embodies excellence in every facet from its innovative architectural design to its
-        cutting-edge facilities. This complex is poised to redefine the education landscape
-        of the district,” said Mhike.
-        <br /><br />
-        He said if the complex was effectively used, it would greatly impact Masvingo Province.
-        “The complex has the potential to impact on people’s outcomes across Masvingo Province
-        especially when we effectively use it for teacher capacity development,” said Mhike.
-        <br /><br />
-        Masvingo Provincial Education Director (PED) Shyllate Mhike applauded the District for
-        its work and said the province was proud. “I applaud teachers, district personnel and
-        school heads who worked together in achieving this goal and as the province, we are
-        proud of you Masvingo District,” she said.
-        <br /><br />
-        The complex comprises a wellness centre, library, computer laboratory, a lecture room
-        and kitchens — facets that represent the ministry’s strategic priorities.
+      <p style={{ lineHeight: '1.6', fontSize: '1rem' }} data-aos="fade-up">
+        Zaka is a district located 86km southeast of Masvingo under Ndanga communal land. It boasts a strong educational foundation with 94 primary schools and 42 secondary schools, many run by churches and the rural district council. Education was declared a basic human right in 1980, leading to expanded infrastructure and the introduction of science and practical subjects. St Anthony’s High School, now 44 years old, is a nationally renowned institution producing distinguished academics and leaders.
       </p>
 
-      {/* Map Embed */}
-      <div style={{ margin: '2rem 0' }}>
+      <div data-aos="fade-up" style={{ textAlign: 'center', maxWidth: '900px', margin: '3rem auto' }}>
+        <h2>Organisational Vision</h2>
+        <p>
+          To be the leading provider of inclusive quality Education for Socio-Economic Transformation by 2030.
+        </p>
+
+        <h2>Organisational Mission</h2>
+        <p>
+          To provide equitable, quality, inclusive, relevant and competence-driven Infant Junior and Secondary Education.
+        </p>
+
+        <h2>Core Values</h2>
+        <p>
+          Accountability, Integrity, Transparency, Empathy, Teamwork, and Commitment define the Ministry’s culture and principles.
+        </p>
+
+        <h2>Organisational Objectives</h2>
+        <p>
+          The Ministry aims to provide education for all, improve teaching standards, maintain affordable costs, promote inclusive ECD, strengthen STEM and vocational learning, offer psychological services, coordinate feeding programs, and monitor special needs education.
+        </p>
+      </div>
+
+      <div style={{ margin: '2rem 0' }} data-aos="zoom-in">
         <iframe
-          title="Zaka Map"
-          src="https://www.bing.com/maps?&ty=30&q=Zaka%2C%20Masvingo%20Province%2C%20Zimbabwe&vdpid=8133028753895849985&mb=-20.010049~31.097471~-20.761131~31.7712&cardbg=%23F98745&cp=-20.385513~31.061722&lvl=9.872185"
+          title="Zaka District Map"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d379455.2118397272!2d30.930000000000003!3d-20.400000000000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1931c3e6e4e2c3f3%3A0x8e3f0f3f0f3f0f3f!2sZaka%2C%20Masvingo%20Province%2C%20Zimbabwe!5e0!3m2!1sen!2szw!4v1692870000000"
           width="100%"
           height="400"
           style={{ border: 0 }}
           allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
 
-      {/* Departments Section */}
-      <h2 style={{ marginTop: '2rem' }}>Departments & Key Contacts</h2>
-      <div style={{ display: 'grid', gap: '1rem', marginTop: '1rem' }}>
-        {/* Example: This will later be dynamic from Admin + Users DB */}
-        <div style={{ background: 'rgba(0,0,0,0.6)', padding: '1rem', borderRadius: '8px' }}>
-          <h3>Samson Chidzurira — DSI Department</h3>
-          <p><strong>Bio:</strong> [Bio from linked user profile]</p>
-          <p><strong>Contact:</strong> [Phone number from Admin DB]</p>
-        </div>
+      <div style={{ marginTop: '3rem' }} data-aos="fade-up">
+        <h2 style={{ textAlign: 'center', marginBottom: '2rem' }}>District Leadership Profiles</h2>
 
-        <div style={{ background: 'rgba(0,0,0,0.6)', padding: '1rem', borderRadius: '8px' }}>
-          <h3>Inspectorate Department</h3>
-          <p><strong>Bio:</strong> [Bio from linked user profile]</p>
-          <p><strong>Contact:</strong> [Phone number from Admin DB]</p>
-        </div>
-
-        <div style={{ background: 'rgba(0,0,0,0.6)', padding: '1rem', borderRadius: '8px' }}>
-          <h3>Accounts Department</h3>
-          <p><strong>Bio:</strong> [Bio from linked user profile]</p>
-          <p><strong>Contact:</strong> [Phone number from Admin DB]</p>
-        </div>
-
-        <div style={{ background: 'rgba(0,0,0,0.6)', padding: '1rem', borderRadius: '8px' }}>
-          <h3>Administration Department</h3>
-          <p><strong>Bio:</strong> [Bio from linked user profile]</p>
-          <p><strong>Contact:</strong> [Phone number from Admin DB]</p>
-        </div>
-
-        <div style={{ background: 'rgba(0,0,0,0.6)', padding: '1rem', borderRadius: '8px' }}>
-          <h3>HR Department</h3>
-          <p><strong>Bio:</strong> [Bio from linked user profile]</p>
-          <p><strong>Contact:</strong> [Phone number from Admin DB]</p>
-        </div>
-
-        <div style={{ background: 'rgba(0,0,0,0.6)', padding: '1rem', borderRadius: '8px' }}>
-          <h3>IT Department</h3>
-          <p><strong>Bio:</strong> [Bio from linked user profile]</p>
-          <p><strong>Contact:</strong> [Phone number from Admin DB]</p>
-        </div>
+        {profiles.map((profile, index) => (
+          <div key={index} style={{
+            background: 'rgba(0,0,0,0.6)',
+            padding: '1.5rem',
+            borderRadius: '10px',
+            marginBottom: '2rem',
+            maxWidth: '800px',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            textAlign: 'center'
+          }}>
+            <div style={{
+              width: '100px',
+              height: '100px',
+              borderRadius: '50%',
+              backgroundColor: '#444',
+              margin: '0 auto 1rem'
+            }}>
+              {/* Replace with <img src={profile.image} /> when ready */}
+            </div>
+            <h3>{profile.name}</h3>
+            <h4 style={{ fontStyle: 'italic', marginBottom: '1rem' }}>{profile.title}</h4>
+            <p>{profile.bio}</p>
+            {profile.members && (
+              <p><strong>Team Members:</strong> {profile.members.join(', ')}</p>
+            )}
+            <div style={{ marginTop: '1rem', fontSize: '0.95rem' }}>
+              {profile.duties.map((duty, i) => (
+                <p key={i}>• {duty}</p>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
