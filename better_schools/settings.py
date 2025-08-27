@@ -5,8 +5,8 @@ from datetime import timedelta
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY
-SECRET_KEY = 'your-secret-key'  # Replace with a secure key or use os.environ.get()
-FIELD_ENCRYPTION_KEY = 'hyZiNQo1Q8FLPaEAJRfAW2cFmgpsFUtJU0FPxmw05-s='
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'your-fallback-secret-key')
+FIELD_ENCRYPTION_KEY = os.environ.get('DJANGO_FIELD_ENCRYPTION_KEY', 'hyZiNQo1Q8FLPaEAJRfAW2cFmgpsFUtJU0FPxmw05-s=')
 DEBUG = True
 ALLOWED_HOSTS = ['zvikoro.onrender.com']
 
@@ -62,7 +62,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'better_schools.wsgi.application'
 
-# ✅ DATABASE: SQLite3
+# DATABASE
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -112,7 +112,10 @@ SIMPLE_JWT = {
 }
 
 # CORS
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "https://bspzzaka.vercel.app"
+]
 
 # LOGGING
 LOGGING = {
