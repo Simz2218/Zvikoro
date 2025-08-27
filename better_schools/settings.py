@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'your-secret-key'  # Replace with a secure key or use os.environ.get()
 FIELD_ENCRYPTION_KEY = 'hyZiNQo1Q8FLPaEAJRfAW2cFmgpsFUtJU0FPxmw05-s='
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['zvikoro.onrender.com']
 
 # STATIC & MEDIA
 STATIC_URL = '/static/'
