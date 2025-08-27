@@ -56,7 +56,7 @@ class Users(AbstractBaseUser, PermissionsMixin):
                                    related_name="users")
     is_admin   = models.BooleanField(default=True)
     profile = models.ImageField(upload_to="user_images", default="default.jpg", null=True, blank=True)
-
+    is_staff=models.BooleanField(default=True)
     bio        = models.CharField(max_length=1000, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
