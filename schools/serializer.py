@@ -29,64 +29,6 @@ import logging
 
 logger = logging.getLogger(__name__)  # You can configure this in settings.py
 
-class UserProfileSerializer(serializers.ModelSerializer):
-    admin = AdminProfileSerializer(required=False)
-    profile = serializers.ImageField(required=False)
-    profile_url = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Users
-        fields = ["id", "username", "email", "profile", "profile_url", "bio", "is_admin", "admin"]
-        extra_kwargs = {
-            "profile": {"required": False}
-        }
-
-    def get_profile_url(self, obj):
-        request = self.context.get("request")
-        return obj.get_profile_url(request)
-
-    def update(self, instance, validated_data):
-        logger.info(f"Incoming validated_data: {validated_data}")
-
-        admin_data = validated_data.pop("admin", None)
-        logger.info(f"Extracted admin_data: {admin_data}")
-
-        # Handle profile image separately
-        if "profile" in validated_data:
-            profile_file = validated_data.pop("profile")
-            if profile_file is None:
-                logger.info("Removing profile image")
-                instance.profile.delete(save=False)
-                instance.profile = None
-            else:
-                logger.info(f"Updating profile image: {profile_file}")
-                instance.profile = profile_file
-        else:
-            logger.info("No profile image provided")
-
-        # Update user fields
-        for attr, value in validated_data.items():
-            logger.info(f"Updating user field: {attr} = {value}")
-            setattr(instance, attr, value)
-        instance.save()
-        logger.info(f"User {instance.username} saved successfully")
-
-        # Update or create nested admin
-        if admin_data:
-            if instance.admin:
-                logger.info(f"Updating existing admin for user {instance.username}")
-                for attr, value in admin_data.items():
-                    logger.info(f"Updating admin field: {attr} = {value}")
-                    setattr(instance.admin, attr, value)
-                instance.admin.save()
-            else:
-                logger.info(f"Creating new admin for user {instance.username}")
-                admin_obj = Admin.objects.create(**admin_data)
-                instance.admin = admin_obj
-                instance.save()
-
-        return instance
-
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):

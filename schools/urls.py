@@ -72,7 +72,7 @@ urlpatterns = [
     path("steacher/teacher-data/", STeacherDataListView.as_view(), name="steacher-data"),        # NEW
 
     
-    path('update-balance/', views.update_balance, name='update_balance'),
+    path('update-balance/', views.UpdateBalanceView.as_view()),
     path('', include(router.urls)),
     ## messages: 
     # urls.py

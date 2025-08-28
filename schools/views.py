@@ -6,6 +6,9 @@ from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import get_object_or_404
 
 
 from .models import (
@@ -223,18 +226,22 @@ class UserProfileUpdateView(generics.RetrieveUpdateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_object(self):
-        # Always return the logged-in user
-        return self.request.user
+        return get_object_or_404(Users, pk=self.request.user.pk)
 
     def get_serializer_context(self):
-        """
-        Ensure serializer has access to request so get_profile() 
-        can build absolute URLs for images.
-        """
+        """ Ensure serializer has access to request so get_profile() can build absolute URLs for images. """
         context = super().get_serializer_context()
         context.update({"request": self.request})
         return context
 
+
+    def patch(self, request, *args, **kwargs):
+        serializer = self.get_serializer(self.get_object(), data=request.data, partial=True)
+        if not serializer.is_valid():
+            print(serializer.errors)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return super().patch(request, *args, **kwargs)
+    
 
 
 
@@ -425,29 +432,29 @@ import logging
 from django.http import HttpResponse
 
 logger = logging.getLogger(__name__)
+ogger = logging.getLogger(__name__)
 
-def _update_balance_for_type(
-    SchoolModel, GradeEnrollmentModel, PaymentsModel, multiplier
-):
-    """Generic updater for a given school/payment type."""
+def get_current_term():
     current_month = datetime.datetime.now().month
     if current_month in [1, 2, 3, 4]:
-        current_term = 1
+        return 1
     elif current_month in [5, 6, 7, 8]:
-        current_term = 2
+        return 2
     else:
-        current_term = 3
+        return 3
 
+def _update_balance_for_type(SchoolModel, GradeEnrollmentModel, PaymentsModel, multiplier):
+    current_term = get_current_term()
     current_year = datetime.datetime.now().year
     logger.info(f"Updating {SchoolModel.__name__}: term {current_term}, year {current_year}")
-
+    
     for school in SchoolModel.objects.all():
         try:
             grade_enrollment = GradeEnrollmentModel.objects.get(
                 school=school, level='grand_total', year=current_year
             )
             grand_total = (grade_enrollment.total or 0) * multiplier
-
+            
             # previous term's payments
             if current_term == 1:
                 previous_payments = PaymentsModel.objects.filter(
@@ -457,20 +464,18 @@ def _update_balance_for_type(
                 previous_payments = PaymentsModel.objects.filter(
                     school=school, year=current_year, term=current_term - 1
                 ).order_by('-id')
-
+            
             if previous_payments.exists():
-                prev = previous_payments.all
+                prev = previous_payments.first()
                 balance = prev.balance - grand_total
                 logger.info(f"Prev payment found for {school.id}, balance: {balance}")
             else:
                 balance = -grand_total
                 logger.info(f"No prev payment for {school.id}, balance: {balance}")
-
+            
             # Create or get this term's payment record
             new_payment, created = PaymentsModel.objects.get_or_create(
-                school=school,
-                year=current_year,
-                term=current_term,
+                school=school, year=current_year, term=current_term,
                 defaults={
                     'paid_amount': 0,
                     'date_paid': None,
@@ -481,16 +486,19 @@ def _update_balance_for_type(
                 logger.info(f"New payment created for {school.id}")
             else:
                 logger.info(f"Payment already exists for {school.id}")
-
         except GradeEnrollmentModel.DoesNotExist:
             logger.error(f"No grade enrollment for {school.id}")
 
-def update_balance(request):
-    _update_balance_for_type(PSchool, PGradeEnrollment, PryPayments, multiplier=2)
-    _update_balance_for_type(SSchool, SGradeEnrollment, SecPayments, multiplier=4)
-    return HttpResponse("Balance updated successfully")
+class UpdateBalanceView(APIView):
+    @method_decorator(csrf_exempt, name='dispatch')
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
-
+    def post(self, request):
+        _update_balance_for_type(PSchool, PGradeEnrollment, PryPayments, multiplier=2)
+        _update_balance_for_type(SSchool, SGradeEnrollment, SecPayments, multiplier=4)
+        return Response({"status": "successfully records created"}, status=status.HTTP_201_CREATED)
+        
 # Create and list messages
 
 # views.py
