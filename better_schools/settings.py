@@ -8,7 +8,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'your-fallback-secret-key')
 FIELD_ENCRYPTION_KEY = os.environ.get('DJANGO_FIELD_ENCRYPTION_KEY', 'hyZiNQo1Q8FLPaEAJRfAW2cFmgpsFUtJU0FPxmw05-s=')
 DEBUG = True
-ALLOWED_HOSTS = ['https://zvikoro.onrender.com']
+ALLOWED_HOSTS = ['zvikoro.onrender.com']
 
 # STATIC & MEDIA
 STATIC_URL = '/static/'
